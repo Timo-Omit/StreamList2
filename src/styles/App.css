@@ -1,0 +1,104 @@
+/* General body styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #1e1e2f; /* Dark cool blue background */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #f0f0f0; /* Light gray for text contrast */
+}
+
+/* Navigation Menu */
+nav {
+  background-color: #5e60ce; /* Cool purple for the nav bar */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  width: 100%;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: white; /* White text */
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: #48bfe3; /* Cool blue for links */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #4cc9f0; /* Lighter blue hover effect */
+  transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+/* StreamList page styling */
+h1 {
+  color: #64dfdf; /* Cool teal for the header */
+  text-align: center;
+  margin-top: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+input {
+  padding: 12px;
+  width: 320px;
+  font-size: 16px;
+  border: 2px solid #80ffdb; /* Teal border around input */
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #2a2a40; /* Dark cool background */
+  color: white;
+}
+
+button {
+  padding: 12px 24px;
+  background-color: #72efdd; /* Cool green for button */
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #64dfdf; /* Lighter teal on hover */
+  transform: scale(1.05); /* Button grows on hover */
+}
+
+/* Footer and other content styling */
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #888;
+}
