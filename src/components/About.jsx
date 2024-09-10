@@ -1,7 +1,14 @@
-  // About.jsx
-  function About() {
-    return <h1>About Page (Coming in Week 5)</h1>;
-  }
-  
-  export default About;
-  
+// src/components/About.js
+
+import React from 'react';
+
+const About = () => {
+  return (
+    <div>
+      <h1>About Page</h1>
+      <p>This page will be built in Week 5.</p>
+    </div>
+  );
+};
+
+export default About;
