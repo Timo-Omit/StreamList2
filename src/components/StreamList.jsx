@@ -1,43 +1,64 @@
-// src/components/StreamList.js
-
 import React, { useState } from 'react';
 
 const StreamList = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [submittedValue, setSubmittedValue] = useState(null);
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+  const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState('');
+  
+  const addEvent = () => {
+    if (newEvent) {
+      setEvents([...events, { text: newEvent, watched: false }]);
+      setNewEvent(''); // Clear input after adding
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputValue.trim() === '') {
-      alert('Please enter an event.');
-      return;
-    }
-    setSubmittedValue(inputValue);  // Display the submitted input
-    setInputValue('');  // Clear the input field after submission
+  const deleteEvent = (index) => {
+    setEvents(events.filter((_, i) => i !== index));
+  };
+
+  const editEvent = (index, newText) => {
+    const updatedEvents = events.map((event, i) =>
+      i === index ? { ...event, text: newText } : event
+    );
+    setEvents(updatedEvents);
+  };
+
+  const toggleWatched = (index) => {
+    const updatedEvents = events.map((event, i) =>
+      i === index ? { ...event, watched: !event.watched } : event
+    );
+    setEvents(updatedEvents);
   };
 
   return (
-    <div className="streamlist-container">
+    <div>
       <h1>StreamList</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter an event..."
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      {submittedValue && (
-        <div className="submitted-output">
-          <h2>Your Event:</h2>
-          <p>{submittedValue}</p>
-        </div>
-      )}
+      <input
+        type="text"
+        value={newEvent}
+        onChange={(e) => setNewEvent(e.target.value)}
+        placeholder="Enter event"
+      />
+      <button onClick={addEvent}>Add Event</button>
+
+      <ul>
+        {events.map((event, index) => (
+          <li key={index} style={{ textDecoration: event.watched ? 'line-through' : 'none' }}>
+            {event.text}
+            <button onClick={() => toggleWatched(index)}>
+              {event.watched ? 'Unwatch' : 'Watch'}
+            </button>
+            <button onClick={() => deleteEvent(index)}>Delete</button>
+            <button
+              onClick={() => {
+                const newText = prompt('Edit event:', event.text);
+                if (newText) editEvent(index, newText);
+              }}
+            >
+              Edit
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -1,12 +1,10 @@
-// src/components/About.js
-
 import React from 'react';
 
 const About = () => {
   return (
-    <div>
-      <h1>About Page</h1>
-      <p>This page will be built in Week 5.</p>
+    <div className="about-container">
+      <h2>About Us</h2>
+      <p>This is a movie streaming platform that helps you manage your subscriptions and stream events!</p>
     </div>
   );
 };
