@@ -1,21 +1,22 @@
 /* General body styling */
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #1e1e2f; /* Dark cool blue background */
+  background-color: #141414; /* Netflix's dark background */
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: #f0f0f0; /* Light gray for text contrast */
+  color: #e5e5e5; /* Light gray for text contrast */
+  text-align: center;
 }
 
 /* Navigation Menu */
 nav {
-  background-color: #5e60ce; /* Cool purple for the nav bar */
+  background-color: #181818; /* Dark gray for the nav bar */
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for emphasis */
   width: 100%;
 }
 
@@ -37,17 +38,25 @@ nav ul li a {
   font-size: 18px;
   font-weight: bold;
   padding: 10px 20px;
-  background-color: #48bfe3; /* Cool blue for links */
+  background-color: #e50914; /* Netflix red for links */
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 nav ul li a:hover {
-  background-color: #4cc9f0; /* Lighter blue hover effect */
+  background-color: #f40612; /* Lighter red hover effect */
   transform: translateY(-2px); /* Subtle lift on hover */
 }
 
 /* StreamList page styling */
+.streamlist-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #2a2a2a; /* Darker background for StreamList */
+  border-radius: 10px;
+}
+
 h1 {
   color: #64dfdf; /* Cool teal for the header */
   text-align: center;
@@ -89,16 +98,78 @@ button:hover {
   transform: scale(1.05); /* Button grows on hover */
 }
 
+/* Cart Page Styling */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.cart-container ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.cart-container li {
+  padding: 20px;
+  background-color: #333; /* Dark Netflix-like background */
+  margin-bottom: 15px;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cart-container h1 {
+  color: white;
+}
+
+.cart-container input {
+  width: 50px;
+  text-align: center;
+}
+
+.cart-container button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cart-container button:hover {
+  background-color: #f40612;
+  transform: scale(1.05);
+}
+
 /* Footer and other content styling */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #888;
+}
+
 .container {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
 }
 
-footer {
-  text-align: center;
-  margin-top: 40px;
+/* Error message styling for StreamList */
+.error-message {
+  color: red;
   font-size: 14px;
-  color: #888;
+  margin-top: 10px;
 }
