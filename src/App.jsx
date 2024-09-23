@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"; 
 import { useState, useEffect } from "react";
 import StreamList from "./components/StreamList";
 import Movies from "./components/Movies";
 import Cart from "./components/Cart";
 import About from "./components/About";
-import Subscription from "./components/Subscription"; // Import Subscription
+import Subscription from "./components/Subscription"; 
+import TMDBSearch from "./components/TMDBSearch"; // Import the new TMDB search component
 import './styles/App.css';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <li><Link to="/movies">Movies</Link></li>
           <li><Link to="/cart">Cart ({cart.length})</Link></li>
           <li><Link to="/about">About</Link></li>
+          <li><Link to="/search">Movie Search</Link></li> {/* Add Movie Search to the navbar */}
         </ul>
       </nav>
 
@@ -52,8 +54,7 @@ function App() {
         <Route path="/movies" element={<Movies addToCart={addToCart} cartItems={cart} />} />
         <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} setCart={setCart} />} />
         <Route path="/about" element={<About />} />
-        <Route path="/" element={<StreamList cart={cart} setCart={setCart} addToCart={addToCart} />} />
-
+        <Route path="/search" element={<TMDBSearch />} /> {/* Add TMDBSearch route */}
       </Routes>
     </Router>
   );

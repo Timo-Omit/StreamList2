@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Data from '../data/Data';  // Import the data
 
 const StreamList = ({ cart, setCart, addToCart }) => {
@@ -21,7 +21,7 @@ const StreamList = ({ cart, setCart, addToCart }) => {
     // Check if the stream name exists in Data.jsx and add to cart
     const foundItem = Data.find(item => item.name.toLowerCase() === trimmedStreamName.toLowerCase());
     if (foundItem) {
-      addToCart(foundItem);  // Add to cart if item is found
+      addOrUpdateCart(foundItem);  // Optimized add to cart function
     }
 
     // If editing, update the stream
@@ -31,12 +31,28 @@ const StreamList = ({ cart, setCart, addToCart }) => {
       setStreams(updatedStreams);
       setEditIndex(null); // Reset after editing
     } else {
-      // Add new stream
+      // Add new stream to list (not cart)
       setStreams([...streams, { name: trimmedStreamName, watched: false }]);
     }
 
     setStreamName(''); // Clear input
     setError(''); // Clear error
+  };
+
+  // Optimized function to add or update cart
+  const addOrUpdateCart = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+      if (existingItem) {
+        // Update the quantity if the item is already in the cart
+        return prevCart.map(cartItem =>
+          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        );
+      } else {
+        // Add new item to the cart if it doesn't exist
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
   };
 
   // Handle edit button click
