@@ -1,28 +1,32 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"; 
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StreamList from "./components/StreamList";
 import Movies from "./components/Movies";
 import Cart from "./components/Cart";
 import About from "./components/About";
-import Subscription from "./components/Subscription"; 
-import TMDBSearch from "./components/TMDBSearch"; // Import the new TMDB search component
+import Subscription from "./components/Subscription";
+import TMDBSearch from "./components/TMDBSearch";
+import DarkModeToggle from "./components/DarkModeToggle";  
 import './styles/App.css';
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Load cart data from localStorage on page load
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCart(savedCart);
   }, []);
 
-  // Save cart data to localStorage when cart changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  // Add item to cart
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.className = !isDarkMode ? 'dark-mode' : 'light-mode';
+  };
+
   const addToCart = (item) => {
     const existingItem = cart.find(cartItem => cartItem.id === item.id);
     if (!existingItem) {
@@ -30,13 +34,14 @@ function App() {
     }
   };
 
-  // Remove item from cart
   const removeFromCart = (itemId) => {
     setCart(cart.filter(item => item.id !== itemId));
   };
 
   return (
     <Router>
+      <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />  
+
       <nav>
         <ul>
           <li><Link to="/">StreamList</Link></li>
@@ -44,7 +49,7 @@ function App() {
           <li><Link to="/movies">Movies</Link></li>
           <li><Link to="/cart">Cart ({cart.length})</Link></li>
           <li><Link to="/about">About</Link></li>
-          <li><Link to="/search">Movie Search</Link></li> {/* Add Movie Search to the navbar */}
+          <li><Link to="/search">Movie Search</Link></li>
         </ul>
       </nav>
 
@@ -54,7 +59,7 @@ function App() {
         <Route path="/movies" element={<Movies addToCart={addToCart} cartItems={cart} />} />
         <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} setCart={setCart} />} />
         <Route path="/about" element={<About />} />
-        <Route path="/search" element={<TMDBSearch />} /> {/* Add TMDBSearch route */}
+        <Route path="/search" element={<TMDBSearch />} />
       </Routes>
     </Router>
   );

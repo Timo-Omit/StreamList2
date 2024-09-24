@@ -1,29 +1,34 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Loader from './Loader';
+import Notifications from './Notifications';
 
 function TMDBSearch() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);  // Loading state
-  const [error, setError] = useState('');  // Error state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [notification, setNotification] = useState('');
 
   const apiKey = '4a972c1e12856c5e9b70fe137d6d8bbc'; // Replace with your TMDB API key
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    setLoading(true);  // Set loading to true when search starts
-    setError('');  // Reset any previous error messages
+    setLoading(true);
+    setError('');
+    setNotification('');
 
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`
       );
       setMovies(response.data.results);
+      setNotification('Movies found successfully!');
     } catch (error) {
       setError('Error fetching movies. Please try again.');
-      setMovies([]);  // Clear previous movie results on error
+      setMovies([]);
     } finally {
-      setLoading(false);  // Set loading to false when the request is done
+      setLoading(false);
     }
   };
 
@@ -40,25 +45,22 @@ function TMDBSearch() {
         <button type="submit">Search</button>
       </form>
 
-      {/* Display loading message */}
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
 
-      {/* Display error message if any */}
       {error && <p className="error-message">{error}</p>}
 
-      {/* Display movie results if any */}
-      <div>
-        {movies.length > 0 && !loading && (
-          <ul>
-            {movies.map((movie) => (
-              <li key={movie.id}>
-                <h3>{movie.title}</h3>
-                <p>{movie.overview}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {!loading && movies.length > 0 && (
+        <ul>
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <h3>{movie.title}</h3>
+              <p>{movie.overview}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <Notifications message={notification} />
     </div>
   );
 }
