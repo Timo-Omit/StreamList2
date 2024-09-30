@@ -1,0 +1,22 @@
+{
+    "short_name": "StreamList",
+    "name": "StreamList - Your Streaming Subscriptions Manager",
+    "description": "A movie streaming platform that helps you manage your subscriptions and stream events.",
+    "icons": [
+      {
+        "src": "/icons/icon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/icons/icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#e50914",
+    "background_color": "#141414"
+  }
+  
